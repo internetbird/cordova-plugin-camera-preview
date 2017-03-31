@@ -58,13 +58,13 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
     if (startCameraAction.equals(action)) {
-      if (cordova.hasPermission(permissions[0])) {
+    //  if (cordova.hasPermission(permissions[0])) {
         return startCamera(args, callbackContext);
-      } else {
-        execCallback = callbackContext;
-        execArgs = args;
-        cordova.requestPermissions(this, 0, permissions);
-      }
+      // } else {
+      //   execCallback = callbackContext;
+      //   execArgs = args;
+      //   cordova.requestPermissions(this, 0, permissions);
+      // }
     } else if (takePictureAction.equals(action)) {
       return takePicture(args, callbackContext);
     } else if (setColorEffectAction.equals(action)) {
