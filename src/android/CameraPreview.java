@@ -143,6 +143,9 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
       return false;
     }
     fragment = new CameraActivity();
+
+    Log.d(TAG, "created new fragment camera activity");
+
     fragment.setEventListener(this);
     final CallbackContext cb = callbackContext;
 
@@ -181,6 +184,7 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
           }
           //display camera bellow the webview
           if(toBack){
+            Log.d(TAG, "toBack is set"); 
             webView.getView().setBackgroundColor(0x00000000);
             ((ViewGroup)webView.getView()).bringToFront();
           }else{
@@ -189,14 +193,20 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
             containerView.bringToFront();
           }
 
+
+          Log.d(TAG, "beginning fragement transaction"); 
           //add the fragment to the container
           FragmentManager fragmentManager = cordova.getActivity().getFragmentManager();
           FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
           fragmentTransaction.add(containerView.getId(), fragment);
           fragmentTransaction.commit();
 
-          cb.success("Camera started");
+          Log.d(TAG, "Camera started");
+          cb.success("Camera started"); 
+
         } catch (Exception e) {
+
+          Log.d(TAG, "Failed to start camera :" + e.toString());
           e.printStackTrace();
           cb.error("Camera start error");
         }
